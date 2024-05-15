@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'analizador_lexico',
+    'analizador_lexico_V2',
 ]
 
 MIDDLEWARE = [

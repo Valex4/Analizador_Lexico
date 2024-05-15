@@ -5,4 +5,5 @@ from .views import home
 
 urlpatterns = [
     path('', home, name='home'),
+    path('/tarea2', home, name='tarea2'),
 ]
