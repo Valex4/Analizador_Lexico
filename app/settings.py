@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'analizador_lexico',
     'analizador_lexico_V2',
+    'analizardor_lexico_sinonimos'
 ]
 
 MIDDLEWARE = [

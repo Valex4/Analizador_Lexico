@@ -7,4 +7,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('analizador_lexico.urls')),
     path('', include('analizador_lexico_V2.urls')),
+    path('', include('analizardor_lexico_sinonimos.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
