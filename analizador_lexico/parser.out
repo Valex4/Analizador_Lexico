@@ -1,0 +1,695 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    DO
+    ELSE
+    IF
+    WHILE
+
+Grammar
+
+Rule 0     S' -> statements
+Rule 1     statements -> statements statement
+Rule 2     statements -> statement
+Rule 3     statement -> LBRACE statements RBRACE
+Rule 4     statement -> FOR LPAREN declaration SEMI expression SEMI expression RPAREN statement
+Rule 5     declaration -> ID EQ NUMBER
+Rule 6     declaration -> ID EQ ID
+Rule 7     statement -> expression SEMI
+Rule 8     expression -> ID
+Rule 9     expression -> NUMBER
+Rule 10    expression -> expression GT expression
+Rule 11    expression -> expression LT expression
+Rule 12    expression -> expression EQ expression
+Rule 13    expression -> expression PLUS expression
+Rule 14    expression -> ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN
+Rule 15    expression -> ID DOT ID DOT ID LPAREN STRING RPAREN
+
+Terminals, with rules where they appear
+
+DO                   : 
+DOT                  : 14 14 15 15
+ELSE                 : 
+EQ                   : 5 6 12
+FOR                  : 4
+GT                   : 10
+ID                   : 5 6 6 8 14 14 14 15 15 15
+IF                   : 
+LBRACE               : 3
+LPAREN               : 4 14 15
+LT                   : 11
+NUMBER               : 5 9
+PLUS                 : 13 14
+RBRACE               : 3
+RPAREN               : 4 14 15
+SEMI                 : 4 4 7
+STRING               : 14 15
+WHILE                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+declaration          : 4
+expression           : 4 4 7 10 10 11 11 12 12 13 13 14
+statement            : 1 2 4
+statements           : 1 3 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statements
+    (1) statements -> . statements statement
+    (2) statements -> . statement
+    (3) statement -> . LBRACE statements RBRACE
+    (4) statement -> . FOR LPAREN declaration SEMI expression SEMI expression RPAREN statement
+    (7) statement -> . expression SEMI
+    (8) expression -> . ID
+    (9) expression -> . NUMBER
+    (10) expression -> . expression GT expression
+    (11) expression -> . expression LT expression
+    (12) expression -> . expression EQ expression
+    (13) expression -> . expression PLUS expression
+    (14) expression -> . ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN
+    (15) expression -> . ID DOT ID DOT ID LPAREN STRING RPAREN
+
+    LBRACE          shift and go to state 3
+    FOR             shift and go to state 4
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 7
+
+    statements                     shift and go to state 1
+    statement                      shift and go to state 2
+    expression                     shift and go to state 5
+
+state 1
+
+    (0) S' -> statements .
+    (1) statements -> statements . statement
+    (3) statement -> . LBRACE statements RBRACE
+    (4) statement -> . FOR LPAREN declaration SEMI expression SEMI expression RPAREN statement
+    (7) statement -> . expression SEMI
+    (8) expression -> . ID
+    (9) expression -> . NUMBER
+    (10) expression -> . expression GT expression
+    (11) expression -> . expression LT expression
+    (12) expression -> . expression EQ expression
+    (13) expression -> . expression PLUS expression
+    (14) expression -> . ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN
+    (15) expression -> . ID DOT ID DOT ID LPAREN STRING RPAREN
+
+    LBRACE          shift and go to state 3
+    FOR             shift and go to state 4
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 7
+
+    statement                      shift and go to state 8
+    expression                     shift and go to state 5
+
+state 2
+
+    (2) statements -> statement .
+
+    LBRACE          reduce using rule 2 (statements -> statement .)
+    FOR             reduce using rule 2 (statements -> statement .)
+    ID              reduce using rule 2 (statements -> statement .)
+    NUMBER          reduce using rule 2 (statements -> statement .)
+    $end            reduce using rule 2 (statements -> statement .)
+    RBRACE          reduce using rule 2 (statements -> statement .)
+
+
+state 3
+
+    (3) statement -> LBRACE . statements RBRACE
+    (1) statements -> . statements statement
+    (2) statements -> . statement
+    (3) statement -> . LBRACE statements RBRACE
+    (4) statement -> . FOR LPAREN declaration SEMI expression SEMI expression RPAREN statement
+    (7) statement -> . expression SEMI
+    (8) expression -> . ID
+    (9) expression -> . NUMBER
+    (10) expression -> . expression GT expression
+    (11) expression -> . expression LT expression
+    (12) expression -> . expression EQ expression
+    (13) expression -> . expression PLUS expression
+    (14) expression -> . ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN
+    (15) expression -> . ID DOT ID DOT ID LPAREN STRING RPAREN
+
+    LBRACE          shift and go to state 3
+    FOR             shift and go to state 4
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 7
+
+    statements                     shift and go to state 9
+    statement                      shift and go to state 2
+    expression                     shift and go to state 5
+
+state 4
+
+    (4) statement -> FOR . LPAREN declaration SEMI expression SEMI expression RPAREN statement
+
+    LPAREN          shift and go to state 10
+
+
+state 5
+
+    (7) statement -> expression . SEMI
+    (10) expression -> expression . GT expression
+    (11) expression -> expression . LT expression
+    (12) expression -> expression . EQ expression
+    (13) expression -> expression . PLUS expression
+
+    SEMI            shift and go to state 11
+    GT              shift and go to state 12
+    LT              shift and go to state 13
+    EQ              shift and go to state 14
+    PLUS            shift and go to state 15
+
+
+state 6
+
+    (8) expression -> ID .
+    (14) expression -> ID . DOT ID DOT ID LPAREN STRING PLUS expression RPAREN
+    (15) expression -> ID . DOT ID DOT ID LPAREN STRING RPAREN
+
+    SEMI            reduce using rule 8 (expression -> ID .)
+    GT              reduce using rule 8 (expression -> ID .)
+    LT              reduce using rule 8 (expression -> ID .)
+    EQ              reduce using rule 8 (expression -> ID .)
+    PLUS            reduce using rule 8 (expression -> ID .)
+    RPAREN          reduce using rule 8 (expression -> ID .)
+    DOT             shift and go to state 16
+
+
+state 7
+
+    (9) expression -> NUMBER .
+
+    SEMI            reduce using rule 9 (expression -> NUMBER .)
+    GT              reduce using rule 9 (expression -> NUMBER .)
+    LT              reduce using rule 9 (expression -> NUMBER .)
+    EQ              reduce using rule 9 (expression -> NUMBER .)
+    PLUS            reduce using rule 9 (expression -> NUMBER .)
+    RPAREN          reduce using rule 9 (expression -> NUMBER .)
+
+
+state 8
+
+    (1) statements -> statements statement .
+
+    LBRACE          reduce using rule 1 (statements -> statements statement .)
+    FOR             reduce using rule 1 (statements -> statements statement .)
+    ID              reduce using rule 1 (statements -> statements statement .)
+    NUMBER          reduce using rule 1 (statements -> statements statement .)
+    $end            reduce using rule 1 (statements -> statements statement .)
+    RBRACE          reduce using rule 1 (statements -> statements statement .)
+
+
+state 9
+
+    (3) statement -> LBRACE statements . RBRACE
+    (1) statements -> statements . statement
+    (3) statement -> . LBRACE statements RBRACE
+    (4) statement -> . FOR LPAREN declaration SEMI expression SEMI expression RPAREN statement
+    (7) statement -> . expression SEMI
+    (8) expression -> . ID
+    (9) expression -> . NUMBER
+    (10) expression -> . expression GT expression
+    (11) expression -> . expression LT expression
+    (12) expression -> . expression EQ expression
+    (13) expression -> . expression PLUS expression
+    (14) expression -> . ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN
+    (15) expression -> . ID DOT ID DOT ID LPAREN STRING RPAREN
+
+    RBRACE          shift and go to state 17
+    LBRACE          shift and go to state 3
+    FOR             shift and go to state 4
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 7
+
+    statement                      shift and go to state 8
+    expression                     shift and go to state 5
+
+state 10
+
+    (4) statement -> FOR LPAREN . declaration SEMI expression SEMI expression RPAREN statement
+    (5) declaration -> . ID EQ NUMBER
+    (6) declaration -> . ID EQ ID
+
+    ID              shift and go to state 19
+
+    declaration                    shift and go to state 18
+
+state 11
+
+    (7) statement -> expression SEMI .
+
+    LBRACE          reduce using rule 7 (statement -> expression SEMI .)
+    FOR             reduce using rule 7 (statement -> expression SEMI .)
+    ID              reduce using rule 7 (statement -> expression SEMI .)
+    NUMBER          reduce using rule 7 (statement -> expression SEMI .)
+    $end            reduce using rule 7 (statement -> expression SEMI .)
+    RBRACE          reduce using rule 7 (statement -> expression SEMI .)
+
+
+state 12
+
+    (10) expression -> expression GT . expression
+    (8) expression -> . ID
+    (9) expression -> . NUMBER
+    (10) expression -> . expression GT expression
+    (11) expression -> . expression LT expression
+    (12) expression -> . expression EQ expression
+    (13) expression -> . expression PLUS expression
+    (14) expression -> . ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN
+    (15) expression -> . ID DOT ID DOT ID LPAREN STRING RPAREN
+
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 7
+
+    expression                     shift and go to state 20
+
+state 13
+
+    (11) expression -> expression LT . expression
+    (8) expression -> . ID
+    (9) expression -> . NUMBER
+    (10) expression -> . expression GT expression
+    (11) expression -> . expression LT expression
+    (12) expression -> . expression EQ expression
+    (13) expression -> . expression PLUS expression
+    (14) expression -> . ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN
+    (15) expression -> . ID DOT ID DOT ID LPAREN STRING RPAREN
+
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 7
+
+    expression                     shift and go to state 21
+
+state 14
+
+    (12) expression -> expression EQ . expression
+    (8) expression -> . ID
+    (9) expression -> . NUMBER
+    (10) expression -> . expression GT expression
+    (11) expression -> . expression LT expression
+    (12) expression -> . expression EQ expression
+    (13) expression -> . expression PLUS expression
+    (14) expression -> . ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN
+    (15) expression -> . ID DOT ID DOT ID LPAREN STRING RPAREN
+
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 7
+
+    expression                     shift and go to state 22
+
+state 15
+
+    (13) expression -> expression PLUS . expression
+    (8) expression -> . ID
+    (9) expression -> . NUMBER
+    (10) expression -> . expression GT expression
+    (11) expression -> . expression LT expression
+    (12) expression -> . expression EQ expression
+    (13) expression -> . expression PLUS expression
+    (14) expression -> . ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN
+    (15) expression -> . ID DOT ID DOT ID LPAREN STRING RPAREN
+
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 7
+
+    expression                     shift and go to state 23
+
+state 16
+
+    (14) expression -> ID DOT . ID DOT ID LPAREN STRING PLUS expression RPAREN
+    (15) expression -> ID DOT . ID DOT ID LPAREN STRING RPAREN
+
+    ID              shift and go to state 24
+
+
+state 17
+
+    (3) statement -> LBRACE statements RBRACE .
+
+    LBRACE          reduce using rule 3 (statement -> LBRACE statements RBRACE .)
+    FOR             reduce using rule 3 (statement -> LBRACE statements RBRACE .)
+    ID              reduce using rule 3 (statement -> LBRACE statements RBRACE .)
+    NUMBER          reduce using rule 3 (statement -> LBRACE statements RBRACE .)
+    $end            reduce using rule 3 (statement -> LBRACE statements RBRACE .)
+    RBRACE          reduce using rule 3 (statement -> LBRACE statements RBRACE .)
+
+
+state 18
+
+    (4) statement -> FOR LPAREN declaration . SEMI expression SEMI expression RPAREN statement
+
+    SEMI            shift and go to state 25
+
+
+state 19
+
+    (5) declaration -> ID . EQ NUMBER
+    (6) declaration -> ID . EQ ID
+
+    EQ              shift and go to state 26
+
+
+state 20
+
+    (10) expression -> expression GT expression .
+    (10) expression -> expression . GT expression
+    (11) expression -> expression . LT expression
+    (12) expression -> expression . EQ expression
+    (13) expression -> expression . PLUS expression
+
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+    SEMI            reduce using rule 10 (expression -> expression GT expression .)
+    RPAREN          reduce using rule 10 (expression -> expression GT expression .)
+    GT              shift and go to state 12
+    LT              shift and go to state 13
+    EQ              shift and go to state 14
+    PLUS            shift and go to state 15
+
+  ! GT              [ reduce using rule 10 (expression -> expression GT expression .) ]
+  ! LT              [ reduce using rule 10 (expression -> expression GT expression .) ]
+  ! EQ              [ reduce using rule 10 (expression -> expression GT expression .) ]
+  ! PLUS            [ reduce using rule 10 (expression -> expression GT expression .) ]
+
+
+state 21
+
+    (11) expression -> expression LT expression .
+    (10) expression -> expression . GT expression
+    (11) expression -> expression . LT expression
+    (12) expression -> expression . EQ expression
+    (13) expression -> expression . PLUS expression
+
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+    SEMI            reduce using rule 11 (expression -> expression LT expression .)
+    RPAREN          reduce using rule 11 (expression -> expression LT expression .)
+    GT              shift and go to state 12
+    LT              shift and go to state 13
+    EQ              shift and go to state 14
+    PLUS            shift and go to state 15
+
+  ! GT              [ reduce using rule 11 (expression -> expression LT expression .) ]
+  ! LT              [ reduce using rule 11 (expression -> expression LT expression .) ]
+  ! EQ              [ reduce using rule 11 (expression -> expression LT expression .) ]
+  ! PLUS            [ reduce using rule 11 (expression -> expression LT expression .) ]
+
+
+state 22
+
+    (12) expression -> expression EQ expression .
+    (10) expression -> expression . GT expression
+    (11) expression -> expression . LT expression
+    (12) expression -> expression . EQ expression
+    (13) expression -> expression . PLUS expression
+
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+    SEMI            reduce using rule 12 (expression -> expression EQ expression .)
+    RPAREN          reduce using rule 12 (expression -> expression EQ expression .)
+    GT              shift and go to state 12
+    LT              shift and go to state 13
+    EQ              shift and go to state 14
+    PLUS            shift and go to state 15
+
+  ! GT              [ reduce using rule 12 (expression -> expression EQ expression .) ]
+  ! LT              [ reduce using rule 12 (expression -> expression EQ expression .) ]
+  ! EQ              [ reduce using rule 12 (expression -> expression EQ expression .) ]
+  ! PLUS            [ reduce using rule 12 (expression -> expression EQ expression .) ]
+
+
+state 23
+
+    (13) expression -> expression PLUS expression .
+    (10) expression -> expression . GT expression
+    (11) expression -> expression . LT expression
+    (12) expression -> expression . EQ expression
+    (13) expression -> expression . PLUS expression
+
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+    SEMI            reduce using rule 13 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 13 (expression -> expression PLUS expression .)
+    GT              shift and go to state 12
+    LT              shift and go to state 13
+    EQ              shift and go to state 14
+    PLUS            shift and go to state 15
+
+  ! GT              [ reduce using rule 13 (expression -> expression PLUS expression .) ]
+  ! LT              [ reduce using rule 13 (expression -> expression PLUS expression .) ]
+  ! EQ              [ reduce using rule 13 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ reduce using rule 13 (expression -> expression PLUS expression .) ]
+
+
+state 24
+
+    (14) expression -> ID DOT ID . DOT ID LPAREN STRING PLUS expression RPAREN
+    (15) expression -> ID DOT ID . DOT ID LPAREN STRING RPAREN
+
+    DOT             shift and go to state 27
+
+
+state 25
+
+    (4) statement -> FOR LPAREN declaration SEMI . expression SEMI expression RPAREN statement
+    (8) expression -> . ID
+    (9) expression -> . NUMBER
+    (10) expression -> . expression GT expression
+    (11) expression -> . expression LT expression
+    (12) expression -> . expression EQ expression
+    (13) expression -> . expression PLUS expression
+    (14) expression -> . ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN
+    (15) expression -> . ID DOT ID DOT ID LPAREN STRING RPAREN
+
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 7
+
+    expression                     shift and go to state 28
+
+state 26
+
+    (5) declaration -> ID EQ . NUMBER
+    (6) declaration -> ID EQ . ID
+
+    NUMBER          shift and go to state 30
+    ID              shift and go to state 29
+
+
+state 27
+
+    (14) expression -> ID DOT ID DOT . ID LPAREN STRING PLUS expression RPAREN
+    (15) expression -> ID DOT ID DOT . ID LPAREN STRING RPAREN
+
+    ID              shift and go to state 31
+
+
+state 28
+
+    (4) statement -> FOR LPAREN declaration SEMI expression . SEMI expression RPAREN statement
+    (10) expression -> expression . GT expression
+    (11) expression -> expression . LT expression
+    (12) expression -> expression . EQ expression
+    (13) expression -> expression . PLUS expression
+
+    SEMI            shift and go to state 32
+    GT              shift and go to state 12
+    LT              shift and go to state 13
+    EQ              shift and go to state 14
+    PLUS            shift and go to state 15
+
+
+state 29
+
+    (6) declaration -> ID EQ ID .
+
+    SEMI            reduce using rule 6 (declaration -> ID EQ ID .)
+
+
+state 30
+
+    (5) declaration -> ID EQ NUMBER .
+
+    SEMI            reduce using rule 5 (declaration -> ID EQ NUMBER .)
+
+
+state 31
+
+    (14) expression -> ID DOT ID DOT ID . LPAREN STRING PLUS expression RPAREN
+    (15) expression -> ID DOT ID DOT ID . LPAREN STRING RPAREN
+
+    LPAREN          shift and go to state 33
+
+
+state 32
+
+    (4) statement -> FOR LPAREN declaration SEMI expression SEMI . expression RPAREN statement
+    (8) expression -> . ID
+    (9) expression -> . NUMBER
+    (10) expression -> . expression GT expression
+    (11) expression -> . expression LT expression
+    (12) expression -> . expression EQ expression
+    (13) expression -> . expression PLUS expression
+    (14) expression -> . ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN
+    (15) expression -> . ID DOT ID DOT ID LPAREN STRING RPAREN
+
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 7
+
+    expression                     shift and go to state 34
+
+state 33
+
+    (14) expression -> ID DOT ID DOT ID LPAREN . STRING PLUS expression RPAREN
+    (15) expression -> ID DOT ID DOT ID LPAREN . STRING RPAREN
+
+    STRING          shift and go to state 35
+
+
+state 34
+
+    (4) statement -> FOR LPAREN declaration SEMI expression SEMI expression . RPAREN statement
+    (10) expression -> expression . GT expression
+    (11) expression -> expression . LT expression
+    (12) expression -> expression . EQ expression
+    (13) expression -> expression . PLUS expression
+
+    RPAREN          shift and go to state 36
+    GT              shift and go to state 12
+    LT              shift and go to state 13
+    EQ              shift and go to state 14
+    PLUS            shift and go to state 15
+
+
+state 35
+
+    (14) expression -> ID DOT ID DOT ID LPAREN STRING . PLUS expression RPAREN
+    (15) expression -> ID DOT ID DOT ID LPAREN STRING . RPAREN
+
+    PLUS            shift and go to state 37
+    RPAREN          shift and go to state 38
+
+
+state 36
+
+    (4) statement -> FOR LPAREN declaration SEMI expression SEMI expression RPAREN . statement
+    (3) statement -> . LBRACE statements RBRACE
+    (4) statement -> . FOR LPAREN declaration SEMI expression SEMI expression RPAREN statement
+    (7) statement -> . expression SEMI
+    (8) expression -> . ID
+    (9) expression -> . NUMBER
+    (10) expression -> . expression GT expression
+    (11) expression -> . expression LT expression
+    (12) expression -> . expression EQ expression
+    (13) expression -> . expression PLUS expression
+    (14) expression -> . ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN
+    (15) expression -> . ID DOT ID DOT ID LPAREN STRING RPAREN
+
+    LBRACE          shift and go to state 3
+    FOR             shift and go to state 4
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 7
+
+    expression                     shift and go to state 5
+    statement                      shift and go to state 39
+
+state 37
+
+    (14) expression -> ID DOT ID DOT ID LPAREN STRING PLUS . expression RPAREN
+    (8) expression -> . ID
+    (9) expression -> . NUMBER
+    (10) expression -> . expression GT expression
+    (11) expression -> . expression LT expression
+    (12) expression -> . expression EQ expression
+    (13) expression -> . expression PLUS expression
+    (14) expression -> . ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN
+    (15) expression -> . ID DOT ID DOT ID LPAREN STRING RPAREN
+
+    ID              shift and go to state 6
+    NUMBER          shift and go to state 7
+
+    expression                     shift and go to state 40
+
+state 38
+
+    (15) expression -> ID DOT ID DOT ID LPAREN STRING RPAREN .
+
+    SEMI            reduce using rule 15 (expression -> ID DOT ID DOT ID LPAREN STRING RPAREN .)
+    GT              reduce using rule 15 (expression -> ID DOT ID DOT ID LPAREN STRING RPAREN .)
+    LT              reduce using rule 15 (expression -> ID DOT ID DOT ID LPAREN STRING RPAREN .)
+    EQ              reduce using rule 15 (expression -> ID DOT ID DOT ID LPAREN STRING RPAREN .)
+    PLUS            reduce using rule 15 (expression -> ID DOT ID DOT ID LPAREN STRING RPAREN .)
+    RPAREN          reduce using rule 15 (expression -> ID DOT ID DOT ID LPAREN STRING RPAREN .)
+
+
+state 39
+
+    (4) statement -> FOR LPAREN declaration SEMI expression SEMI expression RPAREN statement .
+
+    LBRACE          reduce using rule 4 (statement -> FOR LPAREN declaration SEMI expression SEMI expression RPAREN statement .)
+    FOR             reduce using rule 4 (statement -> FOR LPAREN declaration SEMI expression SEMI expression RPAREN statement .)
+    ID              reduce using rule 4 (statement -> FOR LPAREN declaration SEMI expression SEMI expression RPAREN statement .)
+    NUMBER          reduce using rule 4 (statement -> FOR LPAREN declaration SEMI expression SEMI expression RPAREN statement .)
+    $end            reduce using rule 4 (statement -> FOR LPAREN declaration SEMI expression SEMI expression RPAREN statement .)
+    RBRACE          reduce using rule 4 (statement -> FOR LPAREN declaration SEMI expression SEMI expression RPAREN statement .)
+
+
+state 40
+
+    (14) expression -> ID DOT ID DOT ID LPAREN STRING PLUS expression . RPAREN
+    (10) expression -> expression . GT expression
+    (11) expression -> expression . LT expression
+    (12) expression -> expression . EQ expression
+    (13) expression -> expression . PLUS expression
+
+    RPAREN          shift and go to state 41
+    GT              shift and go to state 12
+    LT              shift and go to state 13
+    EQ              shift and go to state 14
+    PLUS            shift and go to state 15
+
+
+state 41
+
+    (14) expression -> ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN .
+
+    SEMI            reduce using rule 14 (expression -> ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN .)
+    GT              reduce using rule 14 (expression -> ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN .)
+    LT              reduce using rule 14 (expression -> ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN .)
+    EQ              reduce using rule 14 (expression -> ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN .)
+    PLUS            reduce using rule 14 (expression -> ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN .)
+    RPAREN          reduce using rule 14 (expression -> ID DOT ID DOT ID LPAREN STRING PLUS expression RPAREN .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for GT in state 20 resolved as shift
+WARNING: shift/reduce conflict for LT in state 20 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 20 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 20 resolved as shift
+WARNING: shift/reduce conflict for GT in state 21 resolved as shift
+WARNING: shift/reduce conflict for LT in state 21 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 21 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 21 resolved as shift
+WARNING: shift/reduce conflict for GT in state 22 resolved as shift
+WARNING: shift/reduce conflict for LT in state 22 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 22 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 22 resolved as shift
+WARNING: shift/reduce conflict for GT in state 23 resolved as shift
+WARNING: shift/reduce conflict for LT in state 23 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 23 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 23 resolved as shift

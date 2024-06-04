@@ -1,25 +1,21 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analizador Léxico</title>
+    <title>Analizador Léxico y Sintáctico</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
-            max-width: 100%;
         }
         form {
             margin-top: 20px;
         }
-        #prueba{
-            display: flex;
-            flex-direction: row;
-            gap: 20%;
-            margin-left: 200px;
-        }
+
         textarea {
             width: 98%;
             height: 100px;
@@ -29,18 +25,16 @@
         }
 
         button {
-            font-size: x-large;
-            align-items: center;
-            width: 80%;
             padding: 10px 20px;
-            background-color: #850cf7;
+            background-color: #0d91d8;
             color: #fff;
             border: none;
             cursor: pointer;
+            width: 100%;
         }
 
         button:hover {
-            background-color: #46209c;
+            background-color: #1057ca;
         }
 
         h2 {
@@ -59,66 +53,51 @@
             border: 1px solid #ccc;
         }
 
-        h1{
-            color: black;
+        h1 {
+            color: rgb(0, 0, 0);
             text-align: center;
-            
         }
-        table {
-            width: 80%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            margin-left: 150px;
+
+        .column {
+            float: left;
+            width: 50%;
         }
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
         }
     </style>
 </head>
 <body>
-    <h1>Analizador Léxico</h1>
+    <h1>Analizador Léxico y Sintáctico</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <div id="prueba">
-            <div style="width: 100%;">
-                <h3>Seleccione un archivo a analizar</h3>
-                <input type="file" name="archivo">
-            </div>
-            <div style="width: 100%;">
-                <h3>Ingrese texto a analizar</h3>
-                <textarea name="codigo" rows="4" cols="50"></textarea> 
-            </div>
-            <br>
-            
-            <br>
-        </div>
-        <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-            <button type="submit">Analizar</button>
-        </div>
+        <h3>Agregue un archivo a analizar</h3>
+        <input type="file" name="archivo">
+        <br>
+        <h3>Ó Agregue texto a analizar</h3>
+        <textarea name="codigo" rows="4" cols="50"></textarea>
+        <br>
+        <button type="submit">Analizar</button>
     </form>
-    <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-        <h2>Tokens encontrados</h2>
-    </div>
-    <table>
-        <tr>
-            <th>Línea</th>
-            <th>Símbolo</th>
-            <th>Valor</th>
-        </tr>
+
     {% if tokens %}
-            {% for token in tokens%}
-            <tr>
-                <td>{{ token.linea }}</td>
-                <td>{{ token.simbolo }}</td>
-                <td>{{ token.valor }}</td>
-            </tr>
-            {% endfor %}
+    <div class="row">
+        <div class="column">
+            <h2>Tokens encontrados:</h2>
+            <ul>
+                {% for token in tokens %}
+                <li>{{ token }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="column">
+            <h2>Resultado Sintáctico:</h2>
+            <pre>{{ resultado_sintactico }}</pre>
+        </div>
+    </div>
     {% endif %}
-</table>
 </body>
 </html>
