@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Analizador JAVA</title>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center">
+    <div class="w-full max-w-4xl mt-10 bg-white shadow-md rounded-lg p-6">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Analizador Léxico, Sintáctico y Semántico</h1>
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+            <div>
+                <label for="code" class="block text-center text-lg font-medium text-blue-700">Ingrese el código aquí:</label>
+                {{ form.code }}
+            </div>
+            <div class="text-center">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md">Analizar</button>
+            </div>
+        </form>
+
+        {% if tokens %}
+        <div class="mt-10">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Resultados del Análisis Léxico</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white shadow-md rounded-lg">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-2 px-4 border-b border-gray-300">Token</th>
+                            <th class="py-2 px-4 border-b border-gray-300">Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tipo, token in tokens %}
+                        <tr>
+                            <td class="py-2 px-4 border-b border-gray-300">{{ token }}</td>
+                            <td class="py-2 px-4 border-b border-gray-300">{{ tipo }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt-10">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Conteo de Tokens</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white shadow-md rounded-lg">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-2 px-4 border-b border-gray-300">PR</th>
+                            <th class="py-2 px-4 border-b border-gray-300">ID</th>
+                            <th class="py-2 px-4 border-b border-gray-300">Número</th>
+                            <th class="py-2 px-4 border-b border-gray-300">Símbolo</th>
+                            <th class="py-2 px-4 border-b border-gray-300">Error</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2 px-4 border-b border-gray-300">{{ conteo_tokens.PR }}</td>
+                            <td class="py-2 px-4 border-b border-gray-300">{{ conteo_tokens.ID }}</td>
+                            <td class="py-2 px-4 border-b border-gray-300">{{ conteo_tokens.Número }}</td>
+                            <td class="py-2 px-4 border-b border-gray-300">{{ conteo_tokens.Símbolo }}</td>
+                            <td class="py-2 px-4 border-b border-gray-300">{{ conteo_tokens.Error }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt-10">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Análisis Semántico</h2>
+            <p class="text-lg {% if es_valido_semantico %}text-green-700{% else %}text-red-700{% endif %}">
+                {% if es_valido_semantico %}
+                    Correcto
+                {% else %}
+                    Incorrecto
+                {% endif %}
+            </p>
+        </div>
+        
+        <div class="mt-10">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Validación 'for'</h2>
+            {% if formato_for_valido is not None %}
+                <p class="text-lg {% if formato_for_valido %}text-green-700{% else %}text-red-700{% endif %}">
+                    {% if formato_for_valido %}
+                    La estructura del "FOR" es correcto
+                    {% else %}
+                        La estructura del "FOR" es incorrecto
+                    {% endif %}
+                </p>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
