@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'analizador_lexico',
     'analizador_lexico_V2',
     'analizardor_lexico_sinonimos',
-    'analizador_lexico_sintactico_semantico'
+    'analizador_lexico_sintactico_semantico',
+    'analizar_examen'
 ]
 
 MIDDLEWARE = [
